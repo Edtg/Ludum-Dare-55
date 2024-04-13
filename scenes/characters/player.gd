@@ -4,6 +4,7 @@ signal upgrade_confirmed
 
 const MOVE_SPEED: float = 4.0
 const SPRINT_SPEED: float = 6.0
+const SLIDE_SPEED: float = 7.0
 var gravity: float = ProjectSettings.get_setting("physics/3d/default_gravity")
 
 var direction
@@ -27,6 +28,10 @@ func _physics_process(delta):
 		velocity.y = 0
 	else:
 		velocity.y -= gravity * delta
+	
+	if Input.is_action_just_pressed("slide"):
+		velocity.x = direction.x * SLIDE_SPEED
+		velocity.z = direction.z * SLIDE_SPEED
 	
 	if Input.is_action_pressed("slide"):
 		is_sliding = true
