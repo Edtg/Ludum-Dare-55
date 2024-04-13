@@ -1,4 +1,6 @@
-[gd_scene format=3 uid="uid://dd78ps3mbeo07"]
+[gd_scene load_steps=2 format=3 uid="uid://dd78ps3mbeo07"]
+
+[ext_resource type="Script" path="res://scenes/ui/upgrade_menu.gd" id="1_rhfw3"]
 
 [node name="UpgradeMenu" type="Control"]
 layout_mode = 3
@@ -7,6 +9,7 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+script = ExtResource("1_rhfw3")
 
 [node name="PanelContainer" type="PanelContainer" parent="."]
 layout_mode = 1
@@ -49,6 +52,8 @@ layout_mode = 2
 size_flags_horizontal = 3
 text = "Upgrade 3"
 
-[node name="Button" type="Button" parent="PanelContainer/VBoxContainer"]
+[node name="ConfirmButton" type="Button" parent="PanelContainer/VBoxContainer"]
 layout_mode = 2
 text = "Confirm"
+
+[connection signal="pressed" from="PanelContainer/VBoxContainer/ConfirmButton" to="." method="_on_confirm_button_pressed"]

@@ -1,5 +1,7 @@
 extends CharacterBody3D
 
+signal upgrade_confirmed
+
 const MOVE_SPEED: float = 4.0
 const SPRINT_SPEED: float = 6.0
 var gravity: float = ProjectSettings.get_setting("physics/3d/default_gravity")
@@ -8,8 +10,13 @@ var rock_count: int
 var max_rocks: int = 2
 
 @onready var rock_counter = $HUD/RockCounter
+@onready var upgrade_menu = $HUD/UpgradeMenu
 @onready var movement_animation = $MovementAnimation
 @onready var pivot = $Pivot
+
+
+func _ready():
+	upgrade_menu.upgrade_confirmed.connect(_on_upgrade_confirmed)
 
 
 func _physics_process(delta):
@@ -56,3 +63,12 @@ func deposit_rocks():
 
 func update_hud():
 	rock_counter.text = str(rock_count)
+
+
+func show_upgrade_menu():
+	upgrade_menu.show()
+
+
+func _on_upgrade_confirmed():
+	upgrade_menu.hide()
+	upgrade_confirmed.emit()

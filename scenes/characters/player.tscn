@@ -1,7 +1,8 @@
-[gd_scene load_steps=7 format=3 uid="uid://ct8g2abqa7rqd"]
+[gd_scene load_steps=8 format=3 uid="uid://ct8g2abqa7rqd"]
 
 [ext_resource type="Script" path="res://scenes/characters/player.gd" id="1_m6xn8"]
 [ext_resource type="PackedScene" uid="uid://bv1n2iswps23g" path="res://assets/models/Penguin.gltf" id="2_04s3o"]
+[ext_resource type="PackedScene" uid="uid://dd78ps3mbeo07" path="res://scenes/ui/upgrade_menu.tscn" id="3_77upm"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_q7iyf"]
 radius = 0.2
@@ -77,6 +78,9 @@ grow_vertical = 0
 theme_override_font_sizes/font_size = 40
 text = "0"
 horizontal_alignment = 2
+
+[node name="UpgradeMenu" parent="HUD" instance=ExtResource("3_77upm")]
+visible = false
 
 [node name="MovementAnimation" type="AnimationPlayer" parent="."]
 libraries = {
