@@ -1,0 +1,56 @@
+[gd_scene load_steps=7 format=3 uid="uid://6xgq1p12t2w8"]
+
+[sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_c20iu"]
+sky_horizon_color = Color(0.64625, 0.65575, 0.67075, 1)
+ground_horizon_color = Color(0.64625, 0.65575, 0.67075, 1)
+
+[sub_resource type="Sky" id="Sky_l016p"]
+sky_material = SubResource("ProceduralSkyMaterial_c20iu")
+
+[sub_resource type="Environment" id="Environment_vxtqf"]
+background_mode = 2
+sky = SubResource("Sky_l016p")
+tonemap_mode = 2
+glow_enabled = true
+
+[sub_resource type="QuadMesh" id="QuadMesh_xm0bq"]
+size = Vector2(40, 40)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_j5v1l"]
+size = Vector3(30, 0.01, 40)
+
+[sub_resource type="SphereMesh" id="SphereMesh_wr50h"]
+
+[node name="TestMap" type="Node3D"]
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_vxtqf")
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
+transform = Transform3D(-0.866025, -0.433013, 0.25, 0, 0.5, 0.866025, -0.5, 0.75, -0.433013, 0, 0, 0)
+shadow_enabled = true
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 0, 0)
+mesh = SubResource("QuadMesh_xm0bq")
+
+[node name="StaticBody3D" type="StaticBody3D" parent="."]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="StaticBody3D"]
+shape = SubResource("BoxShape3D_j5v1l")
+
+[node name="MeshInstance3D2" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.30549, 0, 0)
+mesh = SubResource("SphereMesh_wr50h")
+
+[node name="MeshInstance3D3" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.60033, 0, -1.82717)
+mesh = SubResource("SphereMesh_wr50h")
+
+[node name="MeshInstance3D4" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.726496, 0, 3.65084)
+mesh = SubResource("SphereMesh_wr50h")
+
+[node name="MeshInstance3D5" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0900669, 0, -5.89014)
+mesh = SubResource("SphereMesh_wr50h")
