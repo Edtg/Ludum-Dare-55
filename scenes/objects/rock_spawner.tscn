@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://ilaqls0gpi3o"]
+
+[ext_resource type="Script" path="res://scenes/objects/rock_spawner.gd" id="1_082fc"]
+
+[node name="RockSpawner" type="Node3D"]
+script = ExtResource("1_082fc")

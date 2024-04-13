@@ -26,6 +26,7 @@ func check_rock_count():
 		rock_count -= required_rocks
 		penguin_spirit.show()
 		assigned_penguin.show_upgrade_menu()
+		GameManager.spirit_summoned(required_rocks)
 
 
 func _on_upgrade_confirmed():

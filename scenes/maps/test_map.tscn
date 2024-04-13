@@ -1,7 +1,7 @@
 [gd_scene load_steps=9 format=3 uid="uid://6xgq1p12t2w8"]
 
 [ext_resource type="PackedScene" uid="uid://dft30y2r2tvho" path="res://scenes/objects/rock_pickup.tscn" id="1_71y6m"]
-[ext_resource type="PackedScene" uid="uid://dve054rj6fdh1" path="res://scenes/objects/nest.tscn" id="2_jjy0b"]
+[ext_resource type="PackedScene" uid="uid://ilaqls0gpi3o" path="res://scenes/objects/rock_spawner.tscn" id="2_pkwi5"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_c20iu"]
 sky_horizon_color = Color(0.64625, 0.65575, 0.67075, 1)
@@ -58,20 +58,7 @@ mesh = SubResource("SphereMesh_wr50h")
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0900669, 0, -5.89014)
 mesh = SubResource("SphereMesh_wr50h")
 
-[node name="RockPickup" parent="." instance=ExtResource("1_71y6m")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.14717, 0.00500011, 0.246528)
-
-[node name="RockPickup2" parent="." instance=ExtResource("1_71y6m")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.03973, 0.00500059, -2.63694)
-
-[node name="RockPickup3" parent="." instance=ExtResource("1_71y6m")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.79018, 0.00500059, -5.01912)
-
-[node name="RockPickup4" parent="." instance=ExtResource("1_71y6m")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -6.841, 0.00500107, 1.2035)
-
-[node name="RockPickup5" parent="." instance=ExtResource("1_71y6m")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -5.29913, 0.00500107, 2.5187)
-
-[node name="Nest" parent="." instance=ExtResource("2_jjy0b")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3, 0, 3)
+[node name="RockSpawner" parent="." instance=ExtResource("2_pkwi5")]
+radius = 10.0
+starting_amount = 8
+rock_scene = ExtResource("1_71y6m")
