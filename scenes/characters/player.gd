@@ -8,6 +8,8 @@ var rock_count: int
 var max_rocks: int = 2
 
 @onready var rock_counter = $HUD/RockCounter
+@onready var movement_animation = $MovementAnimation
+@onready var pivot = $Pivot
 
 
 func _physics_process(delta):
@@ -27,9 +29,13 @@ func _physics_process(delta):
 	if direction:
 		velocity.x = direction.x * speed
 		velocity.z = direction.z * speed
+		pivot.rotation.y = lerp_angle(pivot.rotation.y, atan2(-direction.x, -direction.z), delta * 10)
+		
+		movement_animation.play("walk_loop")
 	else:
 		velocity.x = move_toward(velocity.x, 0, 0.5)
 		velocity.z = move_toward(velocity.z, 0, 0.5)
+		movement_animation.stop()
 	
 	move_and_slide()
 
