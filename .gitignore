@@ -3,3 +3,6 @@
 
 # VS Code specific ignores
 .vscode/
+
+# Exports folder
+exports/
