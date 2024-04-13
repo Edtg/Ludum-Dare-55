@@ -35,7 +35,8 @@ direction = Vector3(0, 1, 0)
 initial_velocity_min = 0.1
 initial_velocity_max = 0.1
 gravity = Vector3(0, 0, 0)
-scale_min = 0.8
+scale_min = 0.4
+scale_max = 0.6
 scale_curve = SubResource("CurveTexture_dwx0y")
 color = Color(0, 0.831373, 0.835294, 1)
 
