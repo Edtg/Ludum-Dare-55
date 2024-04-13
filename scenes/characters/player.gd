@@ -5,6 +5,7 @@ const SPRINT_SPEED: float = 6.0
 var gravity: float = ProjectSettings.get_setting("physics/3d/default_gravity")
 
 var rock_count: int
+var max_rocks: int = 2
 
 @onready var rock_counter = $HUD/RockCounter
 
@@ -36,3 +37,7 @@ func _physics_process(delta):
 func pickup_rock():
 	rock_count += 1
 	rock_counter.text = str(rock_count)
+
+
+func can_pickup_rock() -> bool:
+	return rock_count < max_rocks
