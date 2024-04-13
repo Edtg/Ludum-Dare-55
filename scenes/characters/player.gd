@@ -8,6 +8,7 @@ const SLIDE_SPEED: float = 8.0
 const SLIDE_REQUIRED_SPEED: float = 5.0
 var gravity: float = ProjectSettings.get_setting("physics/3d/default_gravity")
 
+var can_move: bool = true
 var direction
 var is_sliding: bool
 
@@ -52,7 +53,7 @@ func _physics_process(delta):
 		velocity.x = move_toward(velocity.x, 0, 0.1)
 		velocity.z = move_toward(velocity.z, 0, 0.1)
 		pivot.rotation.y = lerp_angle(pivot.rotation.y, atan2(-direction.x, -direction.z), delta * 10)
-	elif input_direction:
+	elif input_direction and can_move:
 		velocity.x = direction.x * speed
 		velocity.z = direction.z * speed
 		pivot.rotation.y = lerp_angle(pivot.rotation.y, atan2(-direction.x, -direction.z), delta * 10)
@@ -85,9 +86,11 @@ func update_hud():
 
 
 func show_upgrade_menu():
+	can_move = false
 	upgrade_menu.show()
 
 
 func _on_upgrade_confirmed():
+	can_move = true
 	upgrade_menu.hide()
 	upgrade_confirmed.emit()
