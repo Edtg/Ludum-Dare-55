@@ -3,8 +3,9 @@ extends CharacterBody3D
 signal upgrade_confirmed
 
 const MOVE_SPEED: float = 4.0
-const SPRINT_SPEED: float = 6.0
-const SLIDE_SPEED: float = 7.0
+const SPRINT_SPEED: float = 5.0
+const SLIDE_SPEED: float = 8.0
+const SLIDE_REQUIRED_SPEED: float = 5.0
 var gravity: float = ProjectSettings.get_setting("physics/3d/default_gravity")
 
 var direction
@@ -29,14 +30,13 @@ func _physics_process(delta):
 	else:
 		velocity.y -= gravity * delta
 	
-	if Input.is_action_just_pressed("slide"):
+	if Input.is_action_just_pressed("slide") and velocity.length() >= SLIDE_REQUIRED_SPEED:
+		is_sliding = true
+		pivot.rotation.x = -90
 		velocity.x = direction.x * SLIDE_SPEED
 		velocity.z = direction.z * SLIDE_SPEED
 	
-	if Input.is_action_pressed("slide"):
-		is_sliding = true
-		pivot.rotation.x = -90
-	else:
+	if Input.is_action_just_released("slide"):
 		is_sliding = false
 		pivot.rotation.x = 0
 	
@@ -49,8 +49,8 @@ func _physics_process(delta):
 		speed = SPRINT_SPEED
 	
 	if is_sliding:
-		velocity.x = move_toward(velocity.x, 0, 0.05)
-		velocity.z = move_toward(velocity.z, 0, 0.05)
+		velocity.x = move_toward(velocity.x, 0, 0.1)
+		velocity.z = move_toward(velocity.z, 0, 0.1)
 		pivot.rotation.y = lerp_angle(pivot.rotation.y, atan2(-direction.x, -direction.z), delta * 10)
 	elif input_direction:
 		velocity.x = direction.x * speed
