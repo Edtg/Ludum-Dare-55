@@ -1,11 +1,9 @@
 [gd_scene load_steps=3 format=3 uid="uid://b7tkqh7ua6g3"]
 
 [ext_resource type="PackedScene" uid="uid://6xgq1p12t2w8" path="res://scenes/maps/test_map.tscn" id="1_mr7yk"]
-[ext_resource type="PackedScene" uid="uid://ct8g2abqa7rqd" path="res://scenes/characters/player.tscn" id="2_k2e7e"]
+[ext_resource type="Script" path="res://scenes/main.gd" id="1_xrfk6"]
 
 [node name="Main" type="Node"]
-
-[node name="TestMap" parent="." instance=ExtResource("1_mr7yk")]
-
-[node name="Player" parent="." instance=ExtResource("2_k2e7e")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.305478, 0)
+script = ExtResource("1_xrfk6")
+map = ExtResource("1_mr7yk")
+nest_positions = Array[Vector3]([Vector3(3, 0, 3), Vector3(-5, 0, -1)])

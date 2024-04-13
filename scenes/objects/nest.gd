@@ -10,12 +10,12 @@ var rock_count: int
 
 
 func _ready():
-	assigned_penguin = get_tree().get_nodes_in_group("penguins")[0]
-	assigned_penguin.upgrade_confirmed.connect(_on_upgrade_confirmed)
+	if is_instance_valid(assigned_penguin):
+		assigned_penguin.upgrade_confirmed.connect(_on_upgrade_confirmed)
 
 
 func _on_proximity_detector_body_entered(body):
-	if body.is_in_group("penguins"):
+	if body == assigned_penguin:
 		rock_count += body.rock_count
 		body.deposit_rocks()
 		check_rock_count()
