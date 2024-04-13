@@ -6,6 +6,9 @@ const MOVE_SPEED: float = 4.0
 const SPRINT_SPEED: float = 6.0
 var gravity: float = ProjectSettings.get_setting("physics/3d/default_gravity")
 
+var direction
+var is_sliding: bool
+
 var rock_count: int
 var max_rocks: int = 2
 
@@ -25,15 +28,26 @@ func _physics_process(delta):
 	else:
 		velocity.y -= gravity * delta
 	
+	if Input.is_action_pressed("slide"):
+		is_sliding = true
+		pivot.rotation.x = -90
+	else:
+		is_sliding = false
+		pivot.rotation.x = 0
 	
 	var input_direction = Input.get_vector("move_left", "move_right", "move_forward", "move_back")
 	
-	var direction = (transform.basis * Vector3(input_direction.x, 0, input_direction.y)).normalized()
+	if input_direction and not is_sliding:
+		direction = (transform.basis * Vector3(input_direction.x, 0, input_direction.y)).normalized()
 	var speed = MOVE_SPEED
 	if Input.is_action_pressed("sprint"):
 		speed = SPRINT_SPEED
 	
-	if direction:
+	if is_sliding:
+		velocity.x = move_toward(velocity.x, 0, 0.05)
+		velocity.z = move_toward(velocity.z, 0, 0.05)
+		pivot.rotation.y = lerp_angle(pivot.rotation.y, atan2(-direction.x, -direction.z), delta * 10)
+	elif input_direction:
 		velocity.x = direction.x * speed
 		velocity.z = direction.z * speed
 		pivot.rotation.y = lerp_angle(pivot.rotation.y, atan2(-direction.x, -direction.z), delta * 10)
