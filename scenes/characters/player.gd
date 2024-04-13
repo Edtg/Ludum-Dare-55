@@ -4,6 +4,7 @@ const MOVE_SPEED: float = 4.0
 const SPRINT_SPEED: float = 6.0
 var gravity: float = ProjectSettings.get_setting("physics/3d/default_gravity")
 
+var rock_count: int
 
 func _physics_process(delta):
 	if is_on_floor():
@@ -27,3 +28,7 @@ func _physics_process(delta):
 		velocity.z = move_toward(velocity.z, 0, 0.5)
 	
 	move_and_slide()
+
+
+func pickup_rock():
+	rock_count += 1
