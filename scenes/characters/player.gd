@@ -6,6 +6,9 @@ var gravity: float = ProjectSettings.get_setting("physics/3d/default_gravity")
 
 var rock_count: int
 
+@onready var rock_counter = $HUD/RockCounter
+
+
 func _physics_process(delta):
 	if is_on_floor():
 		velocity.y = 0
@@ -32,3 +35,4 @@ func _physics_process(delta):
 
 func pickup_rock():
 	rock_count += 1
+	rock_counter.text = str(rock_count)
