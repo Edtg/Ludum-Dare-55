@@ -5,6 +5,7 @@ var rock_count: int
 
 @export var assigned_penguin: CharacterBody3D
 @export var required_rocks: int = 5
+@export var required_rocks_increase: int = 3
 
 @onready var penguin_spirit = $PenguinSpirit
 
@@ -24,6 +25,7 @@ func _on_proximity_detector_body_entered(body):
 func check_rock_count():
 	if rock_count >= required_rocks:
 		rock_count -= required_rocks
+		required_rocks += required_rocks_increase
 		penguin_spirit.show()
 		assigned_penguin.show_upgrade_menu()
 		GameManager.spirit_summoned(required_rocks)
