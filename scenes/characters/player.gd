@@ -36,8 +36,17 @@ func _physics_process(delta):
 
 func pickup_rock():
 	rock_count += 1
-	rock_counter.text = str(rock_count)
+	update_hud()
 
 
 func can_pickup_rock() -> bool:
 	return rock_count < max_rocks
+
+
+func deposit_rocks():
+	rock_count = 0
+	update_hud()
+
+
+func update_hud():
+	rock_counter.text = str(rock_count)

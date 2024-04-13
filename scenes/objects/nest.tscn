@@ -1,0 +1,30 @@
+[gd_scene load_steps=5 format=3 uid="uid://dve054rj6fdh1"]
+
+[ext_resource type="Script" path="res://scenes/objects/nest.gd" id="1_cvwdi"]
+
+[sub_resource type="CylinderShape3D" id="CylinderShape3D_fji18"]
+height = 1.5
+radius = 1.6
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_jli8x"]
+albedo_color = Color(0.168627, 0.168627, 0.168627, 1)
+
+[sub_resource type="CylinderMesh" id="CylinderMesh_kycpi"]
+material = SubResource("StandardMaterial3D_jli8x")
+top_radius = 1.5
+bottom_radius = 1.5
+height = 0.1
+
+[node name="Nest" type="Node3D"]
+script = ExtResource("1_cvwdi")
+
+[node name="ProximityDetector" type="Area3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.6, 0)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="ProximityDetector"]
+shape = SubResource("CylinderShape3D_fji18")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+mesh = SubResource("CylinderMesh_kycpi")
+
+[connection signal="body_entered" from="ProximityDetector" to="." method="_on_proximity_detector_body_entered"]
