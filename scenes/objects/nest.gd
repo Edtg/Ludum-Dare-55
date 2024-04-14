@@ -43,7 +43,7 @@ func check_rock_count():
 			deposited_rocks.pop_front()
 		required_rocks += required_rocks_increase
 		penguin_spirit.show()
-		assigned_penguin.show_upgrade_menu(rock_count, required_rocks)
+		assigned_penguin.get_upgrade(rock_count, required_rocks)
 		GameManager.spirit_summoned(required_rocks)
 
 

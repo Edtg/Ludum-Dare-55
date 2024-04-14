@@ -1,4 +1,4 @@
-[gd_scene load_steps=9 format=3 uid="uid://6xgq1p12t2w8"]
+[gd_scene load_steps=10 format=3 uid="uid://6xgq1p12t2w8"]
 
 [ext_resource type="PackedScene" uid="uid://dft30y2r2tvho" path="res://scenes/objects/rock_pickup.tscn" id="1_71y6m"]
 [ext_resource type="PackedScene" uid="uid://ilaqls0gpi3o" path="res://scenes/objects/rock_spawner.tscn" id="2_pkwi5"]
@@ -15,6 +15,10 @@ background_mode = 2
 sky = SubResource("Sky_l016p")
 tonemap_mode = 2
 glow_enabled = true
+
+[sub_resource type="NavigationMesh" id="NavigationMesh_484g3"]
+vertices = PackedVector3Array(-19.5, 0.499999, -19.5, -19.5, 0.499999, 19.5, 19.5, 0.499999, 19.5, 19.5, 0.499999, -19.5)
+polygons = [PackedInt32Array(3, 2, 0), PackedInt32Array(0, 2, 1)]
 
 [sub_resource type="QuadMesh" id="QuadMesh_xm0bq"]
 size = Vector2(40, 40)
@@ -33,13 +37,18 @@ environment = SubResource("Environment_vxtqf")
 transform = Transform3D(-0.866025, -0.433013, 0.25, 0, 0.5, 0.866025, -0.5, 0.75, -0.433013, 0, 0, 0)
 shadow_enabled = true
 
-[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+[node name="NavigationRegion3D" type="NavigationRegion3D" parent="."]
+navigation_mesh = SubResource("NavigationMesh_484g3")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="NavigationRegion3D"]
 transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 0, 0)
 mesh = SubResource("QuadMesh_xm0bq")
+skeleton = NodePath("../..")
 
-[node name="StaticBody3D" type="StaticBody3D" parent="."]
+[node name="StaticBody3D" type="StaticBody3D" parent="NavigationRegion3D/MeshInstance3D"]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0, 0)
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="StaticBody3D"]
+[node name="CollisionShape3D" type="CollisionShape3D" parent="NavigationRegion3D/MeshInstance3D/StaticBody3D"]
 shape = SubResource("BoxShape3D_j5v1l")
 
 [node name="MeshInstance3D2" type="MeshInstance3D" parent="."]

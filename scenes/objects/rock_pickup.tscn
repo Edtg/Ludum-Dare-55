@@ -6,7 +6,7 @@
 [sub_resource type="SphereShape3D" id="SphereShape3D_h2ctu"]
 radius = 0.6
 
-[node name="RockPickup" type="Node3D"]
+[node name="RockPickup" type="Node3D" groups=["rocks"]]
 script = ExtResource("1_diipv")
 
 [node name="ProiximityDetector" type="Area3D" parent="."]

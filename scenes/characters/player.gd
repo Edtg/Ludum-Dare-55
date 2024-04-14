@@ -92,7 +92,7 @@ func update_hud():
 	rock_counter.text = str(rock_count)
 
 
-func show_upgrade_menu(rocks_deposited: int, new_required_rocks: int):
+func get_upgrade(rocks_deposited: int, new_required_rocks: int):
 	can_move = false
 	upgrade_menu.show()
 	goal_counter.text = str(rocks_deposited) + "/" + str(new_required_rocks)

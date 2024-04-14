@@ -6,6 +6,7 @@ extends Node
 
 const NEST = preload("res://scenes/objects/nest.tscn")
 const PLAYER = preload("res://scenes/characters/player.tscn")
+const ENEMY = preload("res://scenes/characters/enemy.tscn")
 
 func _ready():
 	setup_map()
@@ -23,7 +24,10 @@ func setup_map():
 			new_nest.assigned_penguin = player
 			new_map.add_child(player)
 		else:
-			# Spawn enemy
-			pass
+			var enemy = ENEMY.instantiate()
+			enemy.position = p
+			enemy.nest_location = new_nest.position
+			new_nest.assigned_penguin = enemy
+			new_map.add_child(enemy)
 		
 		new_map.add_child(new_nest)
