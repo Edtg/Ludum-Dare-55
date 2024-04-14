@@ -29,7 +29,9 @@ func _on_proximity_detector_body_entered(body):
 			deposited_rocks.append(rock)
 			rock.rock_collected.connect(_on_rock_collected)
 			add_child(rock)
-		body.deposit_rocks(rock_count, required_rocks)
+		body.deposit_rocks()
+		if assigned_penguin.has_method("update_goal"):
+			assigned_penguin.update_goal(rock_count, required_rocks)
 		check_rock_count()
 
 
@@ -44,7 +46,9 @@ func check_rock_count():
 			deposited_rocks.pop_front()
 		required_rocks += required_rocks_increase
 		penguin_spirit.show()
-		assigned_penguin.get_upgrade(rock_count, required_rocks)
+		assigned_penguin.get_upgrade()
+		if assigned_penguin.has_method("update_goal"):
+			assigned_penguin.update_goal(rock_count, required_rocks)
 		GameManager.spirit_summoned(required_rocks)
 
 
@@ -55,4 +59,6 @@ func _on_upgrade_confirmed():
 func _on_rock_collected(rock: Node3D):
 	var index = deposited_rocks.find(rock)
 	deposited_rocks.remove_at(index)
-	print("Rock collected")
+	rock_count -= 1
+	if assigned_penguin.has_method("update_goal"):
+		assigned_penguin.update_goal(rock_count, required_rocks)

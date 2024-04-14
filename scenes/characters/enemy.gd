@@ -43,6 +43,9 @@ func _physics_process(delta):
 	if rock_count < max_rocks:
 		target_rock = get_closest_rock()
 		target_location = target_rock.global_position
+		while not nav_agent.is_target_reachable():
+			target_rock = get_closest_rock()
+			target_location = target_rock.global_position
 	else:
 		target_location = nest_location
 	
@@ -91,11 +94,11 @@ func can_pickup_rock() -> bool:
 	return rock_count < max_rocks
 
 
-func deposit_rocks(rocks_deposited: int, rocks_required: int):
+func deposit_rocks():
 	rock_count = 0
 
 
-func get_upgrade(rocks_deposited: int, new_required_rocks: int):
+func get_upgrade():
 	is_upgrading = true
 	upgrade_timer.start()
 	apply_best_upgrade()

@@ -82,9 +82,8 @@ func can_pickup_rock() -> bool:
 	return rock_count < max_rocks
 
 
-func deposit_rocks(rocks_deposited: int, rocks_required: int):
+func deposit_rocks():
 	rock_count = 0
-	goal_counter.text = str(rocks_deposited) + "/" + str(rocks_required)
 	update_hud()
 
 
@@ -92,10 +91,9 @@ func update_hud():
 	rock_counter.text = str(rock_count)
 
 
-func get_upgrade(rocks_deposited: int, new_required_rocks: int):
+func get_upgrade():
 	can_move = false
 	upgrade_menu.show()
-	goal_counter.text = str(rocks_deposited) + "/" + str(new_required_rocks)
 
 
 func _on_upgrade_confirmed():
@@ -114,3 +112,7 @@ func _on_slide_upgraded():
 
 func _on_carrying_upgraded():
 	max_rocks += carrying_upgrade_amount
+
+
+func update_goal(rocks_deposited: int, rocks_required: int):
+	goal_counter.text = str(rocks_deposited) + "/" + str(rocks_required)
