@@ -3,7 +3,7 @@ extends CharacterBody3D
 signal upgrade_confirmed
 
 const MOVE_SPEED: float = 4.0
-const SLIDE_SPEED: float = 8.0
+const SLIDE_BOOST_BASE: float = 2.0
 var gravity: float = ProjectSettings.get_setting("physics/3d/default_gravity")
 
 var can_move: bool = true
@@ -12,8 +12,8 @@ var is_sliding: bool
 
 var upgraded_speed: float
 var speed_upgrade_amount: float = 0.5
-var upgraded_slide_speed: float
-var slide_upgrade_amount: float = 0.4
+var upgraded_slide_boost: float
+var slide_upgrade_amount: float = 0.8
 var carrying_upgrade_amount: int = 1
 
 var rock_count: int
@@ -41,8 +41,8 @@ func _physics_process(delta):
 	if Input.is_action_just_pressed("slide") and velocity.length() >= MOVE_SPEED:
 		is_sliding = true
 		pivot.rotation.x = -90
-		velocity.x = direction.x * (SLIDE_SPEED + upgraded_slide_speed)
-		velocity.z = direction.z * (SLIDE_SPEED + upgraded_slide_speed)
+		velocity.x = direction.x * (MOVE_SPEED + upgraded_speed + SLIDE_BOOST_BASE + upgraded_slide_boost)
+		velocity.z = direction.z * (MOVE_SPEED + upgraded_speed + SLIDE_BOOST_BASE + upgraded_slide_boost)
 	
 	if Input.is_action_just_released("slide"):
 		is_sliding = false
@@ -106,7 +106,7 @@ func _on_speed_upgraded():
 
 
 func _on_slide_upgraded():
-	upgraded_slide_speed += slide_upgrade_amount
+	upgraded_slide_boost += slide_upgrade_amount
 
 
 func _on_carrying_upgraded():
