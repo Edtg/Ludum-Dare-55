@@ -3,7 +3,7 @@
 [ext_resource type="Script" path="res://scenes/characters/player.gd" id="1_m6xn8"]
 [ext_resource type="PackedScene" uid="uid://bv1n2iswps23g" path="res://assets/models/Penguin.gltf" id="2_04s3o"]
 [ext_resource type="PackedScene" uid="uid://dd78ps3mbeo07" path="res://scenes/ui/upgrade_menu.tscn" id="3_77upm"]
-[ext_resource type="AudioStream" uid="uid://c06210qgign4h" path="res://assets/sounds/SnowFootstep.wav" id="4_mjosg"]
+[ext_resource type="AudioStream" uid="uid://l5auybu2ny47" path="res://assets/sounds/SnowFootstep2.wav" id="4_yakhw"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_q7iyf"]
 radius = 0.2
@@ -124,6 +124,5 @@ libraries = {
 }
 
 [node name="FootstepSFX" type="AudioStreamPlayer3D" parent="."]
-stream = ExtResource("4_mjosg")
-volume_db = -2.0
-pitch_scale = 1.3
+stream = ExtResource("4_yakhw")
+volume_db = -10.0
