@@ -9,6 +9,11 @@ var gravity: float = ProjectSettings.get_setting("physics/3d/default_gravity")
 var target_rock: Node3D
 var nest_location: Vector3
 
+var direction: Vector3
+
+var is_sliding: bool
+var can_slide: bool = true
+
 var rock_count: int
 var max_rocks: int = 2
 
@@ -25,6 +30,7 @@ var carrying_upgrade_amount: int = 1
 @onready var nav_agent = $NavigationAgent3D
 @onready var upgrade_timer = $UpgradeTimer
 @onready var pivot = $Pivot
+@onready var slide_cooldown = $SlideCooldown
 
 
 func _physics_process(delta):
@@ -42,13 +48,24 @@ func _physics_process(delta):
 	if nav_agent.is_target_reachable():
 		var current_position = global_transform.origin
 		var next_position = nav_agent.get_next_path_position()
-		var new_direction = (next_position - current_position).normalized()
+		if not is_sliding:
+			direction = (next_position - current_position).normalized()
 		
-		pivot.rotation.y = lerp_angle(pivot.rotation.y, atan2(-new_direction.x, -new_direction.z), delta * 10)
+		if current_position.distance_to(next_position) <= 2.0 and not is_sliding:
+			is_sliding = true
+			velocity = direction * (MOVE_SPEED + (speed_level * speed_upgrade_amount) + (slide_level * slide_upgrade_amount))
+			pivot.rotation.x = -90
 		
-		var speed = MOVE_SPEED + (speed_level * speed_upgrade_amount)
+		pivot.rotation.y = lerp_angle(pivot.rotation.y, atan2(-direction.x, -direction.z), delta * 10)
 		
-		velocity = velocity.move_toward(new_direction * speed, 0.25)
+		if is_sliding:
+			velocity = velocity.move_toward(Vector3.ZERO, 0.1)
+			if velocity.length() <= 0.1:
+				is_sliding = false
+				pivot.rotation.x = 0
+		else:
+			var speed = MOVE_SPEED + (speed_level * speed_upgrade_amount)
+			velocity = velocity.move_toward(direction * speed, 0.25)
 		
 		move_and_slide()
 
@@ -94,3 +111,7 @@ func apply_best_upgrade():
 		# Level up carrying
 		carrying_level += 1
 		max_rocks += carrying_upgrade_amount
+
+
+func _on_slide_cooldown_timeout():
+	can_slide = true

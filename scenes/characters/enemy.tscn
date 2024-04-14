@@ -25,4 +25,9 @@ transform = Transform3D(-0.5, 0, -4.37114e-08, 0, 0.5, 0, 4.37114e-08, 0, -0.5, 
 [node name="UpgradeTimer" type="Timer" parent="."]
 one_shot = true
 
+[node name="SlideCooldown" type="Timer" parent="."]
+wait_time = 2.0
+one_shot = true
+
 [connection signal="timeout" from="UpgradeTimer" to="." method="_on_upgrade_timer_timeout"]
+[connection signal="timeout" from="SlideCooldown" to="." method="_on_slide_cooldown_timeout"]
