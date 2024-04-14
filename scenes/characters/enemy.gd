@@ -24,6 +24,7 @@ var carrying_upgrade_amount: int = 1
 
 @onready var nav_agent = $NavigationAgent3D
 @onready var upgrade_timer = $UpgradeTimer
+@onready var pivot = $Pivot
 
 
 func _physics_process(delta):
@@ -42,6 +43,8 @@ func _physics_process(delta):
 		var current_position = global_transform.origin
 		var next_position = nav_agent.get_next_path_position()
 		var new_direction = (next_position - current_position).normalized()
+		
+		pivot.rotation.y = lerp_angle(pivot.rotation.y, atan2(-new_direction.x, -new_direction.z), delta * 10)
 		
 		var speed = MOVE_SPEED + (speed_level * speed_upgrade_amount)
 		

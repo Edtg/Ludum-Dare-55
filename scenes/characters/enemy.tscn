@@ -18,7 +18,7 @@ shape = SubResource("CapsuleShape3D_214oa")
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.2, 0)
 
 [node name="Penguin" parent="Pivot" instance=ExtResource("2_14q2g")]
-transform = Transform3D(0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 0, -0.2, 0)
+transform = Transform3D(-0.5, 0, -4.37114e-08, 0, 0.5, 0, 4.37114e-08, 0, -0.5, 0, -0.2, 0)
 
 [node name="NavigationAgent3D" type="NavigationAgent3D" parent="."]
 
