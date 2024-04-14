@@ -1,5 +1,7 @@
 extends Node3D
 
+signal rock_collected(rock: Node3D)
+
 @export var random_scale_min: float = 0.8
 @export var random_scale_max: float = 1.4
 
@@ -18,4 +20,5 @@ func _on_proiximity_detector_body_entered(body):
 	if body.is_in_group("penguins") and body != owning_penguin:
 		if body.can_pickup_rock():
 			body.pickup_rock()
+			rock_collected.emit(self)
 			queue_free()

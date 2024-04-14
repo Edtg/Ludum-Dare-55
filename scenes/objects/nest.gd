@@ -27,6 +27,7 @@ func _on_proximity_detector_body_entered(body):
 			var pos = Vector2.from_angle(randf() * 2 * PI) * randf_range(0.1, 1.4)
 			rock.position = Vector3(pos.x, 0, pos.y)
 			deposited_rocks.append(rock)
+			rock.rock_collected.connect(_on_rock_collected)
 			add_child(rock)
 		body.deposit_rocks(rock_count, required_rocks)
 		check_rock_count()
@@ -49,3 +50,9 @@ func check_rock_count():
 
 func _on_upgrade_confirmed():
 	penguin_spirit.hide()
+
+
+func _on_rock_collected(rock: Node3D):
+	var index = deposited_rocks.find(rock)
+	deposited_rocks.remove_at(index)
+	print("Rock collected")
