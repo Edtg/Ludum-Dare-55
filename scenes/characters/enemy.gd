@@ -82,8 +82,16 @@ func _physics_process(delta):
 
 
 func get_closest_rock() -> Node3D:
-	var rock = get_tree().get_nodes_in_group("rocks")[0]
-	return rock
+	var rocks = get_tree().get_nodes_in_group("rocks")
+	var closest = rocks[0]
+	var closest_distance_squared = global_position.distance_squared_to(closest.global_position)
+	for r in rocks:
+		if r.owning_penguin == self:
+			continue
+		var distance_squared = global_position.distance_squared_to(r.global_position)
+		if distance_squared < closest_distance_squared:
+			closest = r
+	return closest
 
 
 func pickup_rock():
