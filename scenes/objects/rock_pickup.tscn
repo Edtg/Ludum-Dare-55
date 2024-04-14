@@ -1,17 +1,10 @@
-[gd_scene load_steps=5 format=3 uid="uid://dft30y2r2tvho"]
+[gd_scene load_steps=4 format=3 uid="uid://dft30y2r2tvho"]
 
 [ext_resource type="Script" path="res://scenes/objects/rock_pickup.gd" id="1_diipv"]
+[ext_resource type="PackedScene" uid="uid://c010grq3mcoro" path="res://assets/models/Rock.gltf" id="2_axgcu"]
 
 [sub_resource type="SphereShape3D" id="SphereShape3D_h2ctu"]
 radius = 0.6
-
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_w5x3i"]
-albedo_color = Color(0.360784, 0.360784, 0.360784, 1)
-
-[sub_resource type="SphereMesh" id="SphereMesh_kvh11"]
-material = SubResource("StandardMaterial3D_w5x3i")
-radius = 0.2
-height = 0.4
 
 [node name="RockPickup" type="Node3D"]
 script = ExtResource("1_diipv")
@@ -21,7 +14,6 @@ script = ExtResource("1_diipv")
 [node name="CollisionShape3D" type="CollisionShape3D" parent="ProiximityDetector"]
 shape = SubResource("SphereShape3D_h2ctu")
 
-[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
-mesh = SubResource("SphereMesh_kvh11")
+[node name="RockMesh" parent="." instance=ExtResource("2_axgcu")]
 
 [connection signal="body_entered" from="ProiximityDetector" to="." method="_on_proiximity_detector_body_entered"]
