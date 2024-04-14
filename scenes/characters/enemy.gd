@@ -14,6 +14,14 @@ var max_rocks: int = 2
 
 var is_upgrading: bool
 
+var speed_level: int
+var slide_level: int
+var carrying_level: int
+
+var speed_upgrade_amount: float = 0.5
+var slide_upgrade_amount: float = 0.8
+var carrying_upgrade_amount: int = 1
+
 @onready var nav_agent = $NavigationAgent3D
 @onready var upgrade_timer = $UpgradeTimer
 
@@ -35,7 +43,9 @@ func _physics_process(delta):
 		var next_position = nav_agent.get_next_path_position()
 		var new_direction = (next_position - current_position).normalized()
 		
-		velocity = velocity.move_toward(new_direction * MOVE_SPEED, 0.25)
+		var speed = MOVE_SPEED + (speed_level * speed_upgrade_amount)
+		
+		velocity = velocity.move_toward(new_direction * speed, 0.25)
 		
 		move_and_slide()
 
@@ -60,8 +70,24 @@ func deposit_rocks(rocks_deposited: int, rocks_required: int):
 func get_upgrade(rocks_deposited: int, new_required_rocks: int):
 	is_upgrading = true
 	upgrade_timer.start()
+	apply_best_upgrade()
 
 
 func _on_upgrade_timer_timeout():
 	is_upgrading = false
 	upgrade_confirmed.emit()
+
+
+func apply_best_upgrade():
+	var skill = randi_range(0, 2)
+	
+	if skill == 0:
+		# Level up speed
+		speed_level += 1
+	elif skill == 1:
+		# Level up slide
+		slide_level += 1
+	elif skill == 2:
+		# Level up carrying
+		carrying_level += 1
+		max_rocks += carrying_upgrade_amount
