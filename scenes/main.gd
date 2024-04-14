@@ -8,8 +8,7 @@ const NEST = preload("res://scenes/objects/nest.tscn")
 const PLAYER = preload("res://scenes/characters/player.tscn")
 const ENEMY = preload("res://scenes/characters/enemy.tscn")
 
-func _ready():
-	setup_map()
+@onready var start_menu = $StartMenu
 
 
 func setup_map():
@@ -31,3 +30,8 @@ func setup_map():
 			new_map.add_child(enemy)
 		
 		new_map.add_child(new_nest)
+
+
+func _on_start_button_pressed():
+	start_menu.hide()
+	setup_map()
