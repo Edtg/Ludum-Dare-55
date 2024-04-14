@@ -32,6 +32,7 @@ var carrying_upgrade_amount: int = 1
 @onready var upgrade_timer = $UpgradeTimer
 @onready var pivot = $Pivot
 @onready var slide_cooldown = $SlideCooldown
+@onready var anim_player = $AnimationPlayer
 
 
 func _physics_process(delta):
@@ -68,6 +69,11 @@ func _physics_process(delta):
 		else:
 			var speed = MOVE_SPEED + (speed_level * speed_upgrade_amount)
 			velocity = velocity.move_toward(direction * speed, 0.25)
+		
+		if velocity.length() > 0:
+			anim_player.play("walk_loop")
+		else:
+			anim_player.stop()
 		
 		move_and_slide()
 
