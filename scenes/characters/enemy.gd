@@ -77,8 +77,6 @@ func _physics_process(delta):
 			anim_player.play("walk_loop")
 		else:
 			anim_player.stop()
-		
-		move_and_slide()
 
 
 func get_closest_rock() -> Node3D:
@@ -134,3 +132,8 @@ func apply_best_upgrade():
 
 func _on_slide_cooldown_timeout():
 	can_slide = true
+
+
+func _on_navigation_agent_3d_velocity_computed(safe_velocity):
+	if not is_upgrading and nav_agent.is_target_reachable():
+		move_and_slide()
