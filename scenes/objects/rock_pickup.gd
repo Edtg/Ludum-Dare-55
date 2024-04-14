@@ -9,6 +9,7 @@ extends Node3D
 func _ready():
 	var rock_scale = randf_range(random_scale_min, random_scale_max)
 	rock_mesh.scale = Vector3(rock_scale, rock_scale, rock_scale)
+	rock_mesh.rotation.y = randf_range(0, 360)
 
 
 func _on_proiximity_detector_body_entered(body):
