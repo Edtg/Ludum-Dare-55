@@ -24,26 +24,26 @@ grow_horizontal = 2
 grow_vertical = 2
 size_flags_horizontal = 4
 
-[node name="Label" type="Label" parent="StartMenu/VBoxContainer"]
+[node name="Title" type="Label" parent="StartMenu/VBoxContainer"]
 layout_mode = 2
 theme_override_font_sizes/font_size = 30
-text = "Penguin game"
+text = "Penguin Rock Collector"
 horizontal_alignment = 1
 
-[node name="Label4" type="Label" parent="StartMenu/VBoxContainer"]
+[node name="Instructions" type="Label" parent="StartMenu/VBoxContainer"]
 custom_minimum_size = Vector2(600, 0)
 layout_mode = 2
 text = "Collect as many rocks as you can and bring them back to your nest. With enough rocks, a penguin spirit will be summoned to give you soemthing to help collect rocks for your nest. Watch out for other penguins that are also colecting rocks and might steal yours!"
 horizontal_alignment = 1
 autowrap_mode = 3
 
-[node name="Label2" type="Label" parent="StartMenu/VBoxContainer"]
+[node name="ControlsTitle" type="Label" parent="StartMenu/VBoxContainer"]
 layout_mode = 2
 theme_override_font_sizes/font_size = 24
 text = "Controls"
 horizontal_alignment = 1
 
-[node name="Label3" type="Label" parent="StartMenu/VBoxContainer"]
+[node name="Controls" type="Label" parent="StartMenu/VBoxContainer"]
 custom_minimum_size = Vector2(600, 0)
 layout_mode = 2
 text = "Use WASD to move and Space to slide."
