@@ -3,6 +3,8 @@ extends Node3D
 @export var random_scale_min: float = 0.8
 @export var random_scale_max: float = 1.4
 
+var owning_penguin: CharacterBody3D
+
 @onready var rock_mesh = $RockMesh
 
 
@@ -13,7 +15,7 @@ func _ready():
 
 
 func _on_proiximity_detector_body_entered(body):
-	if body.is_in_group("penguins"):
+	if body.is_in_group("penguins") and body != owning_penguin:
 		if body.can_pickup_rock():
 			body.pickup_rock()
 			queue_free()
