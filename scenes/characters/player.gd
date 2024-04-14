@@ -3,9 +3,7 @@ extends CharacterBody3D
 signal upgrade_confirmed
 
 const MOVE_SPEED: float = 4.0
-const SPRINT_SPEED: float = 5.0
 const SLIDE_SPEED: float = 8.0
-const SLIDE_REQUIRED_SPEED: float = 5.0
 var gravity: float = ProjectSettings.get_setting("physics/3d/default_gravity")
 
 var can_move: bool = true
@@ -40,7 +38,7 @@ func _physics_process(delta):
 	else:
 		velocity.y -= gravity * delta
 	
-	if Input.is_action_just_pressed("slide") and velocity.length() >= SLIDE_REQUIRED_SPEED:
+	if Input.is_action_just_pressed("slide") and velocity.length() >= MOVE_SPEED:
 		is_sliding = true
 		pivot.rotation.x = -90
 		velocity.x = direction.x * (SLIDE_SPEED + upgraded_slide_speed)
@@ -55,8 +53,6 @@ func _physics_process(delta):
 	if input_direction and not is_sliding:
 		direction = (transform.basis * Vector3(input_direction.x, 0, input_direction.y)).normalized()
 	var speed = MOVE_SPEED + upgraded_speed
-	if Input.is_action_pressed("sprint"):
-		speed = SPRINT_SPEED
 	
 	if is_sliding:
 		velocity.x = move_toward(velocity.x, 0, 0.1)
