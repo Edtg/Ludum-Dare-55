@@ -77,18 +77,26 @@ transform = Transform3D(1, 0, 0, 0, 0.258819, 0.965926, 0, -0.965926, 0.258819, 
 
 [node name="HUD" type="CanvasLayer" parent="."]
 
-[node name="RockCounter" type="Label" parent="HUD"]
+[node name="PanelContainer2" type="PanelContainer" parent="HUD"]
 anchors_preset = 3
 anchor_left = 1.0
 anchor_top = 1.0
 anchor_right = 1.0
 anchor_bottom = 1.0
-offset_left = -114.0
-offset_top = -99.0
-offset_right = -45.0
-offset_bottom = -44.0
+offset_left = -150.0
+offset_top = -88.0
+offset_right = -42.0
+offset_bottom = -33.0
 grow_horizontal = 0
 grow_vertical = 0
+
+[node name="MarginContainer" type="MarginContainer" parent="HUD/PanelContainer2"]
+layout_mode = 2
+theme_override_constants/margin_left = 10
+theme_override_constants/margin_right = 10
+
+[node name="RockCounter" type="Label" parent="HUD/PanelContainer2/MarginContainer"]
+layout_mode = 2
 theme_override_font_sizes/font_size = 40
 text = "0"
 horizontal_alignment = 2
@@ -96,23 +104,33 @@ horizontal_alignment = 2
 [node name="UpgradeMenu" parent="HUD" instance=ExtResource("3_77upm")]
 visible = false
 
-[node name="GoalContainer" type="VBoxContainer" parent="HUD"]
+[node name="PanelContainer" type="PanelContainer" parent="HUD"]
 anchors_preset = 5
 anchor_left = 0.5
 anchor_right = 0.5
-offset_left = -152.0
+offset_left = -182.0
 offset_top = 20.0
-offset_right = 152.0
-offset_bottom = 124.0
+offset_right = 182.0
+offset_bottom = 144.0
 grow_horizontal = 2
 
-[node name="Label" type="Label" parent="HUD/GoalContainer"]
+[node name="MarginContainer" type="MarginContainer" parent="HUD/PanelContainer"]
+layout_mode = 2
+theme_override_constants/margin_left = 30
+theme_override_constants/margin_top = 10
+theme_override_constants/margin_right = 30
+theme_override_constants/margin_bottom = 10
+
+[node name="GoalContainer" type="VBoxContainer" parent="HUD/PanelContainer/MarginContainer"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="HUD/PanelContainer/MarginContainer/GoalContainer"]
 layout_mode = 2
 theme_override_font_sizes/font_size = 34
 text = "Next summoining:"
 horizontal_alignment = 1
 
-[node name="GoalCounter" type="Label" parent="HUD/GoalContainer"]
+[node name="GoalCounter" type="Label" parent="HUD/PanelContainer/MarginContainer/GoalContainer"]
 layout_mode = 2
 theme_override_font_sizes/font_size = 38
 text = "0/0"

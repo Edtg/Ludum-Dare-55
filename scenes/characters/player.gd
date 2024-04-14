@@ -19,8 +19,8 @@ var carrying_upgrade_amount: int = 1
 var rock_count: int
 var max_rocks: int = 2
 
-@onready var rock_counter = $HUD/RockCounter
-@onready var goal_counter = $HUD/GoalContainer/GoalCounter
+@onready var rock_counter = $HUD/PanelContainer2/MarginContainer/RockCounter
+@onready var goal_counter = $HUD/PanelContainer/MarginContainer/GoalContainer/GoalCounter
 @onready var upgrade_menu = $HUD/UpgradeMenu
 @onready var movement_animation = $MovementAnimation
 @onready var pivot = $Pivot
