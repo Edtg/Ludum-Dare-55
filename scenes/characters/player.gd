@@ -20,6 +20,7 @@ var rock_count: int
 var max_rocks: int = 2
 
 @onready var rock_counter = $HUD/RockCounter
+@onready var goal_counter = $HUD/GoalContainer/GoalCounter
 @onready var upgrade_menu = $HUD/UpgradeMenu
 @onready var movement_animation = $MovementAnimation
 @onready var pivot = $Pivot
@@ -81,8 +82,9 @@ func can_pickup_rock() -> bool:
 	return rock_count < max_rocks
 
 
-func deposit_rocks():
+func deposit_rocks(rocks_deposited: int, rocks_required: int):
 	rock_count = 0
+	goal_counter.text = str(rocks_deposited) + "/" + str(rocks_required)
 	update_hud()
 
 
@@ -90,9 +92,10 @@ func update_hud():
 	rock_counter.text = str(rock_count)
 
 
-func show_upgrade_menu():
+func show_upgrade_menu(rocks_deposited: int, new_required_rocks: int):
 	can_move = false
 	upgrade_menu.show()
+	goal_counter.text = str(rocks_deposited) + "/" + str(new_required_rocks)
 
 
 func _on_upgrade_confirmed():

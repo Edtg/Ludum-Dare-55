@@ -28,7 +28,7 @@ func _on_proximity_detector_body_entered(body):
 			rock.position = Vector3(pos.x, 0, pos.y)
 			deposited_rocks.append(rock)
 			add_child(rock)
-		body.deposit_rocks()
+		body.deposit_rocks(rock_count, required_rocks)
 		check_rock_count()
 
 
@@ -43,7 +43,7 @@ func check_rock_count():
 			deposited_rocks.pop_front()
 		required_rocks += required_rocks_increase
 		penguin_spirit.show()
-		assigned_penguin.show_upgrade_menu()
+		assigned_penguin.show_upgrade_menu(rock_count, required_rocks)
 		GameManager.spirit_summoned(required_rocks)
 
 

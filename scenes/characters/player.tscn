@@ -83,6 +83,28 @@ horizontal_alignment = 2
 [node name="UpgradeMenu" parent="HUD" instance=ExtResource("3_77upm")]
 visible = false
 
+[node name="GoalContainer" type="VBoxContainer" parent="HUD"]
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -152.0
+offset_top = 20.0
+offset_right = 152.0
+offset_bottom = 124.0
+grow_horizontal = 2
+
+[node name="Label" type="Label" parent="HUD/GoalContainer"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 34
+text = "Next summoining:"
+horizontal_alignment = 1
+
+[node name="GoalCounter" type="Label" parent="HUD/GoalContainer"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 38
+text = "0/0"
+horizontal_alignment = 1
+
 [node name="MovementAnimation" type="AnimationPlayer" parent="."]
 libraries = {
 "": SubResource("AnimationLibrary_6bob3")
