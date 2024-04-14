@@ -4,6 +4,7 @@ signal upgrade_confirmed
 
 const MOVE_SPEED: float = 4.0
 const SLIDE_BOOST_BASE: float = 2.0
+const NAV_Y_OFFSET: float = 0.25
 var gravity: float = ProjectSettings.get_setting("physics/3d/default_gravity")
 
 var target_rock: Node3D
@@ -48,6 +49,7 @@ func _physics_process(delta):
 	if nav_agent.is_target_reachable():
 		var current_position = global_transform.origin
 		var next_position = nav_agent.get_next_path_position()
+		next_position.y = next_position.y - NAV_Y_OFFSET
 		if not is_sliding:
 			direction = (next_position - current_position).normalized()
 		
@@ -60,7 +62,7 @@ func _physics_process(delta):
 		
 		if is_sliding:
 			velocity = velocity.move_toward(Vector3.ZERO, 0.1)
-			if velocity.length() <= 0.1:
+			if velocity.length() <= 1.0:
 				is_sliding = false
 				pivot.rotation.x = 0
 		else:
