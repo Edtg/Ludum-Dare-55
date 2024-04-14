@@ -6,4 +6,4 @@
 [node name="Main" type="Node"]
 script = ExtResource("1_xrfk6")
 map = ExtResource("1_mr7yk")
-nest_positions = Array[Vector3]([Vector3(3, 0, 3), Vector3(-5, 0, -1)])
+nest_positions = Array[Vector3]([Vector3(3, 0, 3), Vector3(-5, 0, -1), Vector3(-8, 0, 4), Vector3(6, 0, -3)])
