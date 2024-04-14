@@ -43,9 +43,14 @@ func _physics_process(delta):
 	if rock_count < max_rocks:
 		target_rock = get_closest_rock()
 		target_location = target_rock.global_position
+		var tries = 1
 		while not nav_agent.is_target_reachable():
+			if tries >= 20:
+				target_rock.rock_collected.emit(target_rock)
+				target_rock.queue_free()
 			target_rock = get_closest_rock()
 			target_location = target_rock.global_position
+			tries += 1
 	else:
 		target_location = nest_location
 	
